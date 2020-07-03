@@ -12,7 +12,7 @@ var app = express();
 
 // connect to mongoose database
 
-mongoose.connect("mongodb://localhost/mediumApi",{
+mongoose.connect("mongodb+srv://app:4dQgv4avZNyyOP3G@cluster0-teyfd.mongodb.net/<dbname>?retryWrites=true&w=majority",{
  useNewUrlParser: true,
  useUnifiedTopology: true
 },(err)=>{

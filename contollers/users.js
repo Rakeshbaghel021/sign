@@ -4,21 +4,26 @@ const jwt = require("jsonwebtoken");
 module.exports = {
     Signup : async (req,res,next)=>{
         try {
-            let user = User.create(req.body);
+            let user = await User.create(req.body);
             console.log(req.body)
-            if(!user)
+            if(!user){
                return res.json({success:false, message:"user not found"});
-            else res.json({user,success:true})
-        } catch (error) {
-            return next(error)
+            
+        } 
+        return res.json({user,success:true}) 
+    }
+        catch (error) {
+            return res.json({error})
 
         }
     },
 
     Signin : async (req,res,next)=>{
-        let{email,password} = req.body;
+        let {email,password} = req.body;
+        console.log(req.body)
         try {
             let user = await User.findOne({email});
+            
             if(!user) res.json({success:false,message:"invalid email"});
 
             if(user.verified) {
@@ -41,9 +46,12 @@ module.exports = {
         )            
                 })
             }
-        } catch (error) {
-            return next(error)
-        }
+            else {
+                res.json({ msg: "Verification Failed!" })
+              }
+                } catch (error) {
+                  return res.json(error);
+                }
     },
 
     ListUsers: async (req, res, next) => {
