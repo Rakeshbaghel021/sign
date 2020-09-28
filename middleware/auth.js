@@ -6,8 +6,13 @@ exports.verifyToken = async (req, res, next) => {
     if (token) {
       jwt.verify(token, process.env.SECRET, (error, decoded) => {
         if (error) return next(error);
-        req.userId = decoded.userid;
-        // console.log(req.userId);
+        req.user = {
+          userId: decoded.userId,
+          email: decoded.email,
+          token,
+        };
+
+        console.log(req.user.userId, token);
 
         next();
       });

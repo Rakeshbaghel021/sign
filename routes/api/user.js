@@ -7,7 +7,7 @@ router.use(auth.verifyToken);
 
 // get a current user
 
-router.get("/current-user", User.CurrentUser);
+router.get("/", User.CurrentUser);
 
 // update a user
 router.put("/:id", User.UpdateUser);
