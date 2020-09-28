@@ -52,7 +52,7 @@ module.exports = {
     }
   },
   // get list of all users
-  AllUsers: async (req, res, next) => {
+  AllUsers: async (req, res) => {
     try {
       let users = await User.find({}, "-password");
       // console.log(users)
@@ -62,7 +62,7 @@ module.exports = {
       return res.json(err);
     }
   },
-  // get a single user
+  // get a single user by id
   SingleUser: async (req, res) => {
     const id = req.params.id;
     try {
@@ -76,11 +76,11 @@ module.exports = {
 
   //  get a current user
   CurrentUser: async (req, res) => {
-    const id = req.userId;
-    console.log(id, "in");
+    const id = req.user.userId;
+    // console.log(id, "in");
     try {
       let user = await User.findById(id, "-password");
-      console.log(user, "hi");
+      // console.log(user, "hi");
       if (!user) return res.json({ success: false, msg: "user not found" });
       res.json({ user, success: true });
     } catch (error) {
@@ -89,7 +89,7 @@ module.exports = {
   },
   // update a user
   UpdateUser: async (req, res) => {
-    const id = req.params.id;
+    const id = req.user.userId;
     console.log(id, "hey");
     try {
       let user = await User.findByIdAndUpdate(id, req.body, { new: true });
@@ -102,7 +102,8 @@ module.exports = {
   // delete a user
 
   DeleteUser: async (req, res) => {
-    const id = req.params.id;
+    const id = req.user.userId;
+    console.log(id, "bye");
     try {
       let user = await User.findByIdAndDelete(id);
       if (!user) return res.json({ success: false, msg: "user not found" });

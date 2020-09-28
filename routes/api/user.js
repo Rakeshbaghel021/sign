@@ -10,9 +10,10 @@ router.use(auth.verifyToken);
 router.get("/", User.CurrentUser);
 
 // update a user
-router.put("/:id", User.UpdateUser);
+router.put("/", User.UpdateUser);
 
 // delete a user
 
-router.delete("/:id", User.DeleteUser);
+router.delete("/", User.DeleteUser);
+
 module.exports = router;
