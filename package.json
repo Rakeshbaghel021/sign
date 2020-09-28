@@ -23,7 +23,7 @@
     "mongoose-url-slugs": "^1.0.2",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.4",
-    "npm": "^6.14.5",
+    "npm": "^6.14.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
